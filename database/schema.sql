@@ -14,7 +14,7 @@ id					int not null auto_increment,
 description			varchar(150),
 priority			int,
 due_date			date,
-user_id				int not null,
+user_id				varchar(8) not null,
 constraint			task_id primary key(id),
 constraint			user_fk foreign key(user_id) references user(id)
 );
