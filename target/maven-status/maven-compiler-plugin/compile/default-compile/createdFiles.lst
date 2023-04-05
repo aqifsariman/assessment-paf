@@ -1,0 +1,7 @@
+ibf2022/paf/assessment/server/controllers/TasksController.class
+ibf2022/paf/assessment/server/repositories/UserRepository.class
+ibf2022/paf/assessment/server/repositories/TaskRepository.class
+ibf2022/paf/assessment/server/models/Task.class
+ibf2022/paf/assessment/server/models/User.class
+ibf2022/paf/assessment/server/ServerApplication.class
+ibf2022/paf/assessment/server/services/TodoService.class
