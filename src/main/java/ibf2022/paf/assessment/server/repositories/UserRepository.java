@@ -4,13 +4,15 @@ import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Repository;
 
 import ibf2022.paf.assessment.server.models.User;
 
 // TODO: Task 3
-
+@Repository
 public class UserRepository {
 
     @Autowired
@@ -20,11 +22,16 @@ public class UserRepository {
     private final String CREATE_USER_SQL = "insert into user (user_id, username, name) values (?, ?, ?)";
 
     public Optional<User> findUserByUsername(String username) {
-        User user = jdbcTemplate.queryForObject(FIND_USER_SQL, BeanPropertyRowMapper.newInstance(User.class), username);
-        if (user == null) {
+        try {
+            User user = jdbcTemplate.queryForObject(FIND_USER_SQL, BeanPropertyRowMapper.newInstance(User.class),
+                    username);
+            return Optional.of(user);
+
+        } catch (EmptyResultDataAccessException e) {
+            System.out.println("Exception: " + e);
             return Optional.empty();
+
         }
-        return Optional.of(user);
     }
 
     public String insertUser(User user) {
